@@ -100,7 +100,7 @@
                         adipiscing elit lorem. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris.</p>
                     <ul>
                         <li>August 15, 2016</li>
-                        <li><a href="single.html">Reply</a></li>
+                        <li><a href="single.php">Reply</a></li>
                     </ul>
                 </div>
                 <div class="clearfix"></div>
@@ -117,7 +117,7 @@
                         adipiscing elit lorem. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris.</p>
                     <ul>
                         <li>August 15, 2016</li>
-                        <li><a href="single.html">Reply</a></li>
+                        <li><a href="single.php">Reply</a></li>
                     </ul>
                 </div>
                 <div class="clearfix"></div>
@@ -134,7 +134,7 @@
                         adipiscing elit lorem. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris.</p>
                     <ul>
                         <li>August 15, 2016</li>
-                        <li><a href="single.html">Reply</a></li>
+                        <li><a href="single.php">Reply</a></li>
                     </ul>
                 </div>
                 <div class="clearfix"></div>

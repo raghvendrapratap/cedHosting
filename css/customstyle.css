@@ -1,0 +1,24 @@
+#logop {
+    color: #e7663f;
+}
+
+#logospan {
+    color: #585CA7;
+    background-color: #e7663f;
+    padding: 0 5px;
+    border-radius: 20px;
+}
+
+#icart {
+    font-size: 40px;
+    padding: 0 10px;
+    margin: 0;
+}
+
+.red {
+    color: red !important;
+}
+
+.normaltext {
+    text-transform: none !important;
+}

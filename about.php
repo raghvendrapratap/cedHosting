@@ -126,7 +126,7 @@
             <div class="solution-grids">
                 <div class="col-md-4 solution-grid">
                     <div class="solution">
-                        <a href="single.html" class="mask"><img src="images/p6.jpg" class="img-responsive zoom-img"
+                        <a href="single.php" class="mask"><img src="images/p6.jpg" class="img-responsive zoom-img"
                                 alt="" /></a>
                         <h4>Vestibulum iaculis</h4>
                         <p>lacinia / dictum</p>
@@ -134,7 +134,7 @@
                 </div>
                 <div class="col-md-4 solution-grid">
                     <div class="solution">
-                        <a href="single.html" class="mask"><img src="images/p7.jpg" class="img-responsive zoom-img"
+                        <a href="single.php" class="mask"><img src="images/p7.jpg" class="img-responsive zoom-img"
                                 alt="" /></a>
                         <h4>elementum velit</h4>
                         <p>Fusce / uismod</p>
@@ -142,7 +142,7 @@
                 </div>
                 <div class="col-md-4 solution-grid">
                     <div class="solution">
-                        <a href="single.html" class="mask"><img src="images/p8.jpg" class="img-responsive zoom-img"
+                        <a href="single.php" class="mask"><img src="images/p8.jpg" class="img-responsive zoom-img"
                                 alt="" /></a>
                         <h4>adipiscing elit</h4>
                         <p>consequat / ante</p>

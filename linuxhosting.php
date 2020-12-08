@@ -1,5 +1,6 @@
 <?php include("header.php"); ?>
 <!---header--->
+
 <!---singleblog--->
 <div class="content">
     <div class="linux-section">

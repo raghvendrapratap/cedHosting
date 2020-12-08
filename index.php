@@ -11,7 +11,7 @@
                 <h3>Unlimited Web Hosting</h3>
                 <p>this hero area to show off some of your nice work. You can even have a video inside it since it’s
                     great as a secondary call to action alongside this button underneath this text.</p>
-                <a href="single.html" class="button">get started</a>
+                <a href="single.php" class="button">get started</a>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -200,27 +200,27 @@
             <h5>We like to keep everyone updated</h5>
             <div class="post-grids">
                 <div class="col-md-4 post-grid">
-                    <a href="single.html" class="mask"><img src="images/p1.jpg" class="img-responsive zoom-img"
+                    <a href="single.php" class="mask"><img src="images/p1.jpg" class="img-responsive zoom-img"
                             alt="/"></a>
-                    <a href="single.html">
+                    <a href="single.php">
                         <h4>Vestibulum ipsums eros</h4>
                     </a>
                     <p>We strive to deliver the very best possible work that’s available out there, at any time.
                         That’s how we set ourselves apart from the competition.</p>
                 </div>
                 <div class="col-md-4 post-grid">
-                    <a href="single.html" class="mask"><img src="images/p2.jpg" class="img-responsive zoom-img"
+                    <a href="single.php" class="mask"><img src="images/p2.jpg" class="img-responsive zoom-img"
                             alt="/"></a>
-                    <a href="single.html">
+                    <a href="single.php">
                         <h4>Vestibulum ipsums eros</h4>
                     </a>
                     <p>We strive to deliver the very best possible work that’s available out there, at any time.
                         That’s how we set ourselves apart from the competition.</p>
                 </div>
                 <div class="col-md-4 post-grid">
-                    <a href="single.html" class="mask"><img src="images/p3.jpg" class="img-responsive zoom-img"
+                    <a href="single.php" class="mask"><img src="images/p3.jpg" class="img-responsive zoom-img"
                             alt="/"></a>
-                    <a href="single.html">
+                    <a href="single.php">
                         <h4>Vestibulum ipsums eros</h4>
                     </a>
                     <p>We strive to deliver the very best possible work that’s available out there, at any time.

@@ -1,8 +1,13 @@
+<?php
+$filename = basename($_SERVER['REQUEST_URI']);
+$file = explode('?', $filename);
+$hostingmenu = array('linuxhosting.php', 'wordpresshosting.php', 'windowshosting.php', 'cmshosting.php');
+?>
 <!DOCTYPE HTML>
 <html>
 
 <head>
-    <title>Planet Hosting a Hosting Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+    <title>Ced Hosting</title>
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,12 +41,15 @@
         $('.team a').Chocolat();
     });
     </script>
+
     <link rel="stylesheet" href="css/swipebox.css">
+    <script src="js/jquery.swipebox.min.js"></script>
     <script type="text/javascript">
     jQuery(function($) {
         $(".swipebox").swipebox();
     });
     </script>
+
     <script type="text/javascript" src="js/jquery.hoverdir.js"></script>
     <script type="text/javascript">
     $(function() {
@@ -54,7 +62,8 @@
     </script>
     <!--script-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
+    <link href="css/customstyle.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="js/custom.js"></script>
 </head>
 
 <body>
@@ -73,37 +82,49 @@
                             <i class="icon-bar"></i>
                         </button>
                         <div class="navbar-brand">
-                            <h1><a href="index.php">Ced Hosting</a></h1>
+                            <h1><a href="index.php">
+                                    <p id="logop">Ced <span id="logospan">Hosting</span></p>
+                                </a></h1>
                         </div>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="index.php">Home <i class="sr-only">(current)</i></a></li>
-                            <li><a href="about.php">About</a></li>
-                            <li class="dropdown">
+                            <li class="<?php if ($file[0] == "index.php") : ?> active<?php endif; ?>"><a
+                                    href="index.php">Home <i class="sr-only">(current)</i></a></li>
+                            <li class="<?php if ($file[0] == "about.php") : ?> active<?php endif; ?>"><a
+                                    href="about.php">About</a></li>
+                            <li class="<?php if ($file[0] == "services.php") : ?> active<?php endif; ?>"><a
+                                    href="services.php">Services</a></li>
+                            <li class="dropdown <?php if (in_array($file[0], $hostingmenu)) : ?> active<?php endif; ?>">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                    aria-haspopup="true" aria-expanded="false">Services<i class="caret"></i></a>
+                                    aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                            aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="linuxhosting.php">Linux hosting</a></li>
-                                            <li><a href="wordpresshosting.php">WordPress Hosting</a></li>
-                                            <li><a href="windowshosting.php">Windows Hosting</a></li>
-                                            <li><a href="cmshosting.php">CMS Hosting</a></li>
-                                        </ul>
+                                    <li class="<?php if ($file[0] == "linuxhosting.php") : ?> active<?php endif; ?>"><a
+                                            href="linuxhosting.php">Linux hosting</a></li>
+                                    <li
+                                        class="<?php if ($file[0] == "wordpresshosting.php") : ?> active<?php endif; ?>">
+                                        <a href="wordpresshosting.php">WordPress Hosting</a>
                                     </li>
+                                    <li class="<?php if ($file[0] == "windowshosting.php") : ?> active<?php endif; ?>">
+                                        <a href="windowshosting.php">Windows Hosting</a>
+                                    </li>
+                                    <li class="<?php if ($file[0] == "cmshosting.php") : ?> active<?php endif; ?>"><a
+                                            href="cmshosting.php">CMS Hosting</a></li>
                                 </ul>
                             </li>
-                            <li><a href="pricing.php">Pricing</a></li>
-                            <li><a href="blog.php">Blog</a></li>
-                            <li><a href="contact.php">Contact</a></li>
-                            <li><a href="cart.php"><i class="fa fa-cart-plus"></i></a></li>
-                            <li><a href="login.php">Login</a></li>
+                            <li class="<?php if ($file[0] == "pricing.php") : ?> active<?php endif; ?>"><a
+                                    href="pricing.php">Pricing</a></li>
+                            <li class="<?php if ($file[0] == "blog.php") : ?> active<?php endif; ?>"><a
+                                    href="blog.php">Blog</a></li>
+                            <li class="<?php if ($file[0] == "contact.php") : ?> active<?php endif; ?>"><a
+                                    href="contact.php">Contact</a></li>
+                            <li class="<?php if ($file[0] == "login.php") : ?> active<?php endif; ?>"><a
+                                    href="login.php">Login</a></li>
                             <li><a href="logout.php">Logout</a></li>
+                            <li class="<?php if ($file[0] == "cart.php") : ?> active<?php endif; ?>"><a id="icart"
+                                    href="cart.php"><i class="fa fa-cart-plus"></i></a></li>
                         </ul>
 
                     </div>
