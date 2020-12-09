@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (isset($_SESSION['userInfo'])) {
+    if ($_SESSION['userInfo']['is_admin'] == 1) {
+        header('Location: admin/index.php');
+    }
+}
 $filename = basename($_SERVER['REQUEST_URI']);
 $file = explode('?', $filename);
 $hostingmenu = array('linuxhosting.php', 'wordpresshosting.php', 'windowshosting.php', 'cmshosting.php');
@@ -120,9 +126,16 @@ $hostingmenu = array('linuxhosting.php', 'wordpresshosting.php', 'windowshosting
                                     href="blog.php">Blog</a></li>
                             <li class="<?php if ($file[0] == "contact.php") : ?> active<?php endif; ?>"><a
                                     href="contact.php">Contact</a></li>
-                            <li class="<?php if ($file[0] == "login.php") : ?> active<?php endif; ?>"><a
-                                    href="login.php">Login</a></li>
+
+                            <?php
+                            if (isset($_SESSION['userInfo'])) {
+                                if ($_SESSION['userInfo']['is_admin'] == 0) { ?>
                             <li><a href="logout.php">Logout</a></li>
+                            <?php }
+                            } else { ?> <li class="<?php if ($file[0] == "login.php") : ?> active<?php endif; ?>"><a
+                                    href="login.php">Login</a></li>
+                            <?php }
+                            ?>
                             <li class="<?php if ($file[0] == "cart.php") : ?> active<?php endif; ?>"><a id="icart"
                                     href="cart.php"><i class="fa fa-cart-plus"></i></a></li>
                         </ul>

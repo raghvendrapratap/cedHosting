@@ -22,3 +22,15 @@
 .normaltext {
     text-transform: none !important;
 }
+
+.text-center {
+    text-align: center !important;
+}
+
+.font-large {
+    font-size: 40px !important;
+}
+
+.pbtm-10 {
+    padding-bottom: 1.5em !important;
+}

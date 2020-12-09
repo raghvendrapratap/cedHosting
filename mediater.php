@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once("classes/dbconn.php");
 include_once("classes/user.php");
 $dbconn = new dbconn();
@@ -22,4 +23,13 @@ if (isset($_POST['login'])) {
     $pass = isset($_POST['pass']) ? $_POST['pass'] : '';
 
     $login = $user->login($email, $pass, $dbconn->conn);
+}
+
+if (isset($_POST['action'])) {
+    if ($_POST['action'] == 'varifyMobEmail') {
+        $mob = isset($_POST['mob']) ? $_POST['mob'] : '';
+        $email = isset($_POST['email']) ? $_POST['email'] : '';
+        $varify = $user->varifyMobEmail($mob, $email, $dbconn->conn);
+        echo $varify;
+    }
 }

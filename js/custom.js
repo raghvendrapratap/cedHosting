@@ -18,30 +18,69 @@ $(function() {
             $(".error").css("display", "none");
         }
     })
+    $(".nospace").bind("keypress", function(e) {
+        var keyCode = e.which ? e.which : e.keyCode
 
-    $("#mob").bind("keyup", function(e) {
+        if ((keyCode == 32)) {
+            $(".error").css("display", "inline");
+            return false;
+        } else {
+            $(".error").css("display", "none");
+        }
+    })
 
-        mobile_no = $("#mob").val();
+    $("#mob").keyup(function() {
+        $("#mobMsg").hide();
+        var first = $("#mob").val().substr(0, 1);
 
-        var fchar = $("#mob").val().substr(0, 1);
-        var schar = $("#mob").val().substr(1, 1);
-        console.log(schar);
-
-        if (fchar == 0) {
+        if (first == 0) {
             $('#mob').attr('maxlength', '11');
             $('#mob').attr('minlength', '11');
-            if (schar == 0) {
-                $("#mob").val(0);
-                if (fchar == "") {
-                    $("#mob").val("");
-                }
 
-            }
         } else {
             $('#mob').attr('maxlength', '10');
             $('#mob').attr('minlength', '10');
         }
     });
+
+    $('.nocopypaste').bind("cut copy paste drag drop", function(e) {
+        e.preventDefault();
+    });
+
+    $(".varifymobEmail").bind("keyup onchange", function(e) {
+        var mob = document.forms["signupform"]["mob"].value;
+        var email = document.forms["signupform"]["email"].value;
+        $("#varify").val("");
+        $.ajax({
+            url: 'mediater.php',
+            type: 'POST',
+            data: {
+                mob: mob,
+                email: email,
+                action: 'varifyMobEmail',
+            },
+            success: function(result) {
+                console.log(result);
+                if (result == "MobExists") {
+                    $("#mobMsg").html("*Mobile no. already exists");
+                    $("#mobMsg").show();
+                    $("#varify").val("invalidMob");
+
+                }
+                if (result == "EmailExists") {
+                    $("#emailMsg").html("*Email already exists");
+                    $("#emailMsg").show();
+                    $("#varify").val("invalidEmail");
+                }
+            },
+            error: function() {
+                $("#emailMsg").hide();
+                $("#mobMsg").hide();
+                $("#varify").val("");
+            }
+        })
+    })
+
 })
 
 function validateForm() {
@@ -59,32 +98,97 @@ function validateForm() {
     var repass = document.forms["signupform"]["repass"].value;
     var ques = document.forms["signupform"]["ques"].value;
     var ans = document.forms["signupform"]["ans"].value;
-    // (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
+
+    var firstmob = mob.substr(0, 1);
+    var secondmob = mob.substr(1, 1);
+
     if (name == "") {
         $("#nameMsg").show();
         return false;
-    } else if (!name.match(/^[a-zA-Z_]+( [a-zA-Z_]+)*$/)) {
+    } else if (!name.match(/^[a-zA-Z]+( [a-zA-Z]+)*$/)) {
         $("#nameMsg").html("*Name should be alphabetic and one space between words");
         $("#nameMsg").show();
         return false;
     }
-    if (mob == "") {
+
+    if (mob == "" || mob == 0) {
+        $("#mobMsg").html("*Enter valid mob no.!");
+        $("#mobMsg").show();
+        return false;
+    } else if (firstmob == 0 && secondmob == 0) {
+        $("#mobMsg").html("*In starting you cant have two zero");
         $("#mobMsg").show();
         return false;
     }
+
+    if (firstmob == 0) {
+        var x = 0;
+        for (var i = 2; i <= 10; i++) {
+
+            var firstchar = mob.substr(1, 1);
+            var secondchar = mob.substr(i, 1);
+            if (firstchar != secondchar) {
+                var x = 1;
+            }
+        }
+        if (x == 0) {
+            $("#mobMsg").html("*All no can't be same");
+            $("#mobMsg").show();
+            return false;
+        }
+    } else if (firstmob != 0) {
+        var x = 0;
+        for (var i = 1; i <= 9; i++) {
+
+            var firstchar = mob.substr(0, 1);
+            var secondchar = mob.substr(i, 1);
+            if (firstchar != secondchar) {
+                var x = 1;
+            }
+        }
+        if (x == 0) {
+            $("#mobMsg").html("*All no can't be same");
+            $("#mobMsg").show();
+            return false;
+        }
+    }
+
+    // (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
+
     if (email == "") {
         $("#emailMsg").show();
         return false;
-    } else if (!email.match(/^[a-z0-9.]+[a-zA-Z0-9]+@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/)) {
+    } else if (!email.match(/^(?!.*\.{2})[a-z0-9]+[a-z0-9.]+[a-z0-9]+@[a-z]{1,}[.]+[a-z]*$/)) {
         $("#emailMsg").html("*Enter valid mail id ,mail id should be in lowercase, i.e- ex.ex@ex.com");
         $("#emailMsg").show();
         return false;
     }
+    $x = $("#varify").val();
+    if ($x == "invalidMob") {
+        $("#mobMsg").html("*Mobile no. already exists");
+        $("#mobMsg").show();
+        return false;
+    } else if ($x == "invalidEmail") {
+        $("#emailMsg").html("*Email already exists");
+        $("#emailMsg").show();
+        return false;
+    }
+
     if (pass == "") {
+        $("#passMsg").show();
+        return false;
+    } else if (!pass.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,16}$/)) {
+        $("#passMsg").html("*Password must contain uppercase, lowercase, special character and numeric value AND length is 8 to 12.");
         $("#passMsg").show();
         return false;
     }
     if (repass == "") {
+        $("#repassMsg").show();
+        return false;
+    }
+
+    if (pass != repass) {
+        $("#repassMsg").html("*Password doesn't match");
         $("#repassMsg").show();
         return false;
     }
@@ -95,10 +199,16 @@ function validateForm() {
     if (ans == "") {
         $("#ansMsg").show();
         return false;
+    } else if (!ans.match(/^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$/)) {
+        $("#ansMsg").html("*Ans can be alpha-numeric / only alphabetic,.");
+        $("#ansMsg").show();
+        return false;
     }
-    if (pass != repass) {
-        $("#repassMsg").html("*Password doesn't match");
-        $("#repassMsg").show();
+    var ans1 = ans.replace(/ /g, '');
+    var ans2 = Number(ans1);
+    if (Number.isInteger(ans2)) {
+        $("#ansMsg").html("*Ans can be alpha-numeric / only alphabetic,.");
+        $("#ansMsg").show();
         return false;
     }
     return true;

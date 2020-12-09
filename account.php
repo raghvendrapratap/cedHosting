@@ -10,15 +10,18 @@
                 <div class="register-but">
                     <form action="mediater.php" name="signupform" onsubmit="return validateForm()" method="post">
                         <div class="register-top-grid">
+                            <h3 class="text-center pbtm-10 font-large">Register Yourself</h3>
                             <h3>personal information</h3>
                             <div>
                                 <span>Name<label>*</label></span>
                                 <input type="text" name="name">
+                                <input type="hidden" id="varify">
                                 <span id="nameMsg" class="red normaltext">*Enter Name</span>
                             </div>
                             <div>
                                 <span>Mobile No.<label>*</label></span>
-                                <input type="text" name="mob" id="mob" class="onlynumber" minlength="10" maxlength="10">
+                                <input type="text" name="mob" id="mob" class="onlynumber nocopypaste varifymobEmail"
+                                    minlength="10" maxlength="10" autocomplete="off">
                                 <span id="mobMsg" class="red normaltext">*Enter Mobile No</span>
                             </div>
 
@@ -32,7 +35,7 @@
                             <h3>login information</h3>
                             <div>
                                 <span>Email Address<label>*</label></span>
-                                <input type="text" name="email" required>
+                                <input type="text" name="email" class="varifymobEmail">
                                 <span id="emailMsg" class="red normaltext">*Enter Email</span>
                             </div>
                         </div>
@@ -42,12 +45,14 @@
                         <div class="register-top-grid">
                             <div>
                                 <span>Password<label>*</label></span>
-                                <input type="password" name="pass">
+                                <input type="password" name="pass" minlength="8" maxlength="16"
+                                    title="Password length should be between 8 to 16" class="nospace nocopypaste">
                                 <span id="passMsg" class="red normaltext">*Enter Password</span>
                             </div>
                             <div>
                                 <span>Confirm Password<label>*</label></span>
-                                <input type="password" name="repass">
+                                <input type="password" name="repass" minlength="8" maxlength="16"
+                                    title="Password length should be between 8 to 16" class="nospace nocopypaste">
                                 <span id="repassMsg" class="red normaltext">*Re-Type Password</span>
                             </div>
                         </div>
