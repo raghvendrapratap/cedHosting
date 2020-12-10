@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (isset($_SESSION['userInfo'])) {
     if ($_SESSION['userInfo']['is_admin'] == 1) {
         header('Location: admin/index.php');

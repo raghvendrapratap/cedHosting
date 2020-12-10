@@ -34,3 +34,16 @@
 .pbtm-10 {
     padding-bottom: 1.5em !important;
 }
+
+.varifybtn {
+    background-color: #6a6ebb !important;
+    padding: 0px 20px !important;
+    height: 45px !important;
+    text-align: center !important;
+    font-size: 18px;
+    color: white;
+}
+
+.varifybtn :hover {
+    background-color: #df7b5d !important;
+}

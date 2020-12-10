@@ -7,7 +7,8 @@ $(function() {
     $("#repassMsg").hide();
     $("#quesMsg").hide();
     $("#ansMsg").hide();
-
+    $(".enteremailOTP").hide();
+    $(".entermobOTP").hide();
     $(".onlynumber").bind("keypress", function(e) {
         var keyCode = e.which ? e.which : e.keyCode
 
@@ -48,6 +49,8 @@ $(function() {
     });
 
     $(".varifymobEmail").bind("keyup onchange", function(e) {
+        $("#emailMsg").hide();
+        $("#mobMsg").hide();
         var mob = document.forms["signupform"]["mob"].value;
         var email = document.forms["signupform"]["email"].value;
         $("#varify").val("");
@@ -156,6 +159,7 @@ function validateForm() {
     // (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
 
     if (email == "") {
+        $("#emailMsg").html("*Enter mail");
         $("#emailMsg").show();
         return false;
     } else if (!email.match(/^(?!.*\.{2})[a-z0-9]+[a-z0-9.]+[a-z0-9]+@[a-z]{1,}[.]+[a-z]*$/)) {
@@ -213,3 +217,97 @@ function validateForm() {
     }
     return true;
 }
+
+
+
+$(".sendmobOTP").click(function() {
+    var mob = $("#mobvalue").val();
+    // var mob = $("#emailvalue").val();
+    // $(".sendmobOTP").hide();
+    // $(".entermobOTP").show();
+    $.ajax({
+        url: 'mediater.php',
+        type: 'POST',
+        data: {
+            mob: mob,
+            action: 'sendOTPMob',
+        },
+        success: function(result) {
+            console.log(result);
+            $(".sendmobOTP").hide();
+            $(".entermobOTP").show();
+        },
+        error: function() {
+
+        }
+    })
+})
+
+$("#resendmobOTP").click(function() {
+    var mob = $("#mobvalue").val();
+    // var mob = $("#emailvalue").val();
+    // $(".sendmobOTP").hide();
+    // $(".entermobOTP").show();
+    $.ajax({
+        url: 'mediater.php',
+        type: 'POST',
+        data: {
+            mob: mob,
+            action: 'sendOTPMob',
+        },
+        success: function(result) {
+            console.log(result);
+            $("#resendmsg").html("Varification code has been re-sent on")
+            $(".sendmobOTP").hide();
+            $(".entermobOTP").show();
+        },
+        error: function() {
+
+        }
+    })
+})
+
+//email otp
+
+$("#sendOTPtomail").click(function() {
+    var email = $("#emailvalue").val();
+
+    $.ajax({
+        url: 'mediater.php',
+        type: 'POST',
+        data: {
+            email: email,
+            action: 'sendOTPEmail',
+        },
+        success: function(result) {
+            console.log(result);
+            $(".sendemailOTP").hide();
+            $(".enteremailOTP").show();
+        },
+        error: function() {
+
+        }
+    })
+})
+
+$("#resendOTPtomail").click(function() {
+    var email = $("#emailvalue").val();
+
+    $.ajax({
+        url: 'mediater.php',
+        type: 'POST',
+        data: {
+            email: email,
+            action: 'sendOTPEmail',
+        },
+        success: function(result) {
+            console.log(result);
+            $("#resendmsgEmail").html("Varification code has been re-sent on ")
+            $(".sendemailOTP").hide();
+            $(".enteremailOTP").show();
+        },
+        error: function() {
+
+        }
+    })
+})

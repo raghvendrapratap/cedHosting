@@ -1,6 +1,6 @@
 <?php include("header.php");
 ?>
-<!-- Admin Header -->
+<!-- Header -->
 <div class="header bg-primary pb-6">
     <div class="container-fluid">
         <div class="header-body">
@@ -405,4 +405,6 @@
         </div>
     </div>
     <!-- Footer -->
-    <?php include("footer.php"); ?>
+    <?php
+    include("footer.php");
+    ?>
