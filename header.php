@@ -6,6 +6,13 @@ if (isset($_SESSION['userInfo'])) {
         header('Location: admin/index.php');
     }
 }
+include_once("classes/dbconn.php");
+include("classes/product.php");
+include_once("classes/user.php");
+$dbconn = new dbconn();
+$product = new product();
+$user = new user();
+
 $filename = basename($_SERVER['REQUEST_URI']);
 $file = explode('?', $filename);
 $hostingmenu = array('linuxhosting.php', 'wordpresshosting.php', 'windowshosting.php', 'cmshosting.php');
@@ -108,17 +115,20 @@ $hostingmenu = array('linuxhosting.php', 'wordpresshosting.php', 'windowshosting
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                     aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li class="<?php if ($file[0] == "linuxhosting.php") : ?> active<?php endif; ?>"><a
-                                            href="linuxhosting.php">Linux hosting</a></li>
-                                    <li
-                                        class="<?php if ($file[0] == "wordpresshosting.php") : ?> active<?php endif; ?>">
-                                        <a href="wordpresshosting.php">WordPress Hosting</a>
+
+                                    <?php
+                                    $pid = 1;
+                                    $category = $product->showCategory($pid, $dbconn->conn);
+                                    if (isset($category)) {
+                                        while ($scategory = $category->fetch_assoc()) {
+                                    ?>
+                                    <li class="<?php if ($file[0] == $scategory['link']) : ?> active<?php endif; ?>"><a
+                                            href="<?php echo $scategory['link'] ?>"><?php echo $scategory['prod_name'] ?></a>
                                     </li>
-                                    <li class="<?php if ($file[0] == "windowshosting.php") : ?> active<?php endif; ?>">
-                                        <a href="windowshosting.php">Windows Hosting</a>
-                                    </li>
-                                    <li class="<?php if ($file[0] == "cmshosting.php") : ?> active<?php endif; ?>"><a
-                                            href="cmshosting.php">CMS Hosting</a></li>
+
+                                    <?php }
+                                    } ?>
+
                                 </ul>
                             </li>
                             <li class="<?php if ($file[0] == "pricing.php") : ?> active<?php endif; ?>"><a

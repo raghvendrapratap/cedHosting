@@ -1,5 +1,15 @@
-<?php include("header.php");
+<?php
+include("header.php");
+include("../classes/product.php");
+include_once("../classes/user.php");
+$dbconn = new dbconn();
+$product = new product();
+
+include_once("../classes/dbconn.php");
+$user = new user();
 ?>
+
+
 
 <div class="header bg-primary pb-6">
     <div class="container-fluid">
@@ -31,168 +41,303 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-6 col-md-8">
                         <div class="card bg-secondary border-0 mt-4">
+                            <?php
+                            if (isset($_GET['alert'])) {
+                                if ($_GET['alert'] == 'added') {
+                            ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                <span class="alert-text"><strong>Success!</strong> New Category is added
+                                    successfully!</span>
+                                <?php
+                                } elseif ($_GET['alert'] == 'addedFail') {
+                                    ?>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                    <span class="alert-text"><strong>Failed!</strong> New Category addition
+                                        failed!</span>
+                                    <?php
+                                    } elseif ($_GET['alert'] == 'delete') {
+                                        ?>
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                        <span class="alert-text"><strong>Success!</strong> Category is deleted
+                                            successfully!</span>
+                                        <?php
+                                        } elseif ($_GET['alert'] == 'update') {
+                                            ?>
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                            <span class="alert-text"><strong>Success!</strong> Category is updated
+                                                successfully!</span>
+                                            <?php
+                                            } elseif ($_GET['alert'] == 'updateFail') {
+                                                ?>
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                                                <span class="alert-text"><strong>Failed!</strong> Category updation
+                                                    failed!</span>
+                                                <?php
+                                                }
+                                                    ?>
+                                                <button type="button" class="close" data-dismiss="alert"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <?php
+                                            }
+                                                ?>
+                                            <div class="card-body px-lg-5 py-lg-4">
+                                                <div class="text-center text-muted mb-4">
+                                                    <strong>Add Category</strong>
+                                                </div>
+                                                <form role="form" action="adminMediater.php" method="POST">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">Parent
+                                                            Category</label>
+                                                        <div
+                                                            class="input-group input-group-merge input-group-alternative mb-3">
+                                                            <!-- <input class="form-control" placeholder="Parent Category" type="text"> -->
+                                                            <select class="form-control" name="parentId">
+                                                                <option selected disabled value="" required>-- Parent
+                                                                    Category
+                                                                    --
+                                                                </option>
+                                                                <?php
+                                                                    $parentCategory = $product->allParentCategory($dbconn->conn);
+                                                                    if (isset($parentCategory)) {
+                                                                        while ($row = $parentCategory->fetch_assoc()) {
+                                                                    ?>
+                                                                <option value="<?php echo $row['id']; ?>">
+                                                                    <?php echo $row['prod_name']; ?></option>
+                                                                <?php
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">
+                                                            Category</label>
+                                                        <div
+                                                            class="input-group input-group-merge input-group-alternative mb-3">
+                                                            <input class="form-control" placeholder="Category"
+                                                                type="text" name="category">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">
+                                                            Link</label>
+                                                        <div
+                                                            class="input-group input-group-merge input-group-alternative mb-3">
 
-                            <div class="card-body px-lg-5 py-lg-4">
-                                <div class="text-center text-muted mb-4">
-                                    <strong>Add Category</strong>
-                                </div>
-                                <form role="form">
-                                    <div class="form-group">
-                                        <label class="form-control-label">Parent
-                                            Category</label>
-                                        <div class="input-group input-group-merge input-group-alternative mb-3">
+                                                            <input class="form-control" placeholder="Link" type="text"
+                                                                name="link">
+                                                        </div>
+                                                    </div>
 
-                                            <input class="form-control" placeholder="Parent Category" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Category</label>
-                                        <div class="input-group input-group-merge input-group-alternative mb-3">
-
-                                            <input class="form-control" placeholder="Category" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">
-                                            Link</label>
-                                        <div class="input-group input-group-merge input-group-alternative mb-3">
-
-                                            <input class="form-control" placeholder="Link" type="text">
-                                        </div>
-                                    </div>
-
-                                    <div class="text-center">
-                                        <input type="submit" class="btn btn-primary mt-3````" value="Add Category">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Dark table -->
-    <div class="row">
-        <div class="col">
-            <div class="card ">
-                <div class="card-header border-0">
-                    <h3 class="mb-0">Light table</h3>
-                </div>
-                <div class="table-responsive">
-                    <table class="table align-items-center table-flush" id="ctable">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col" class="sort" data-sort="name">Project</th>
-                                <th scope="col" class="sort" data-sort="budget">Budget</th>
-                                <th scope="col" class="sort" data-sort="status">Status</th>
-                                <th scope="col">Users</th>
-                                <th scope="col" class="sort" data-sort="completion">Completion</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="list">
-                            <tr>
-                                <th scope="row">
-                                    <div class="media align-items-center">
-                                        <a href="#" class="avatar rounded-circle mr-3">
-                                            <img alt="Image placeholder" src="../assets/img/theme/bootstrap.jpg">
-                                        </a>
-                                        <div class="media-body">
-                                            <span class="name mb-0 text-sm">Argon Design System</span>
-                                        </div>
-                                    </div>
-                                </th>
-                                <td class="budget">
-                                    $2500 USD
-                                </td>
-                                <td>
-                                    <span class="badge badge-dot mr-4">
-                                        <i class="bg-warning"></i>
-                                        <span class="status">pending</span>
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="avatar-group">
-                                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                            data-original-title="Ryan Tompson">
-                                            <img alt="Image placeholder" src="../assets/img/theme/team-1.jpg">
-                                        </a>
-                                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                            data-original-title="Romina Hadid">
-                                            <img alt="Image placeholder" src="../assets/img/theme/team-2.jpg">
-                                        </a>
-                                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                            data-original-title="Alexander Smith">
-                                            <img alt="Image placeholder" src="../assets/img/theme/team-3.jpg">
-                                        </a>
-                                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                            data-original-title="Jessica Doe">
-                                            <img alt="Image placeholder" src="../assets/img/theme/team-4.jpg">
-                                        </a>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <span class="completion mr-2">60%</span>
-                                        <div>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-warning" role="progressbar"
-                                                    aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 60%;"></div>
+                                                    <div class="text-center">
+                                                        <input type="submit" class="btn btn-primary mt-3"
+                                                            value="Add Category" name="addCategory">
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
-                                </td>
-                                <td class="text-right">
-                                    <div class="dropdown">
-                                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  table -->
+                    <div class="row">
+                        <div class="col">
+                            <div class="card ">
+                                <div class="card-header border-0">
+                                    <h3 class="mb-0">Category</h3>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table align-items-center table-flush ctable">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col" class="sort" data-sort="name">Category ID</th>
+                                                <th scope="col" class="sort" data-sort="name">Category Name</th>
+                                                <th scope="col" class="sort" data-sort="name">Parent Category</th>
+                                                <th scope="col" class="sort" data-sort="name">Link</th>
+                                                <th scope="col" class="sort" data-sort="name">Status</th>
+                                                <th scope="col" class="sort" data-sort="completion">Launch Date</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="list">
 
-                        </tbody>
-                    </table>
+                                            <?php
+                                            $pid = 1;
+                                            $category = $product->showCategory($pid, $dbconn->conn);
+                                            if (isset($category)) {
+                                                while ($row = $category->fetch_assoc()) {
+                                                    $pid =  $row['prod_parent_id'];
+                                                    $pname = $product->detailCategory($pid, $dbconn->conn);
+                                                    $parentName = $pname->fetch_assoc();
+                                            ?>
+                                            <tr>
+                                                <td class="budget">
+                                                    <?php echo $row['id']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['prod_name']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $parentName['prod_name']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['link']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($row['prod_available'] == 1) {
+                                                                echo "Available";
+                                                            } elseif ($row['prod_available'] == 0) {
+                                                                echo "Not Available";
+                                                            }
+                                                            ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['prod_launch_date']; ?>
+                                                </td>
+                                                <td class="text-right">
+                                                    <div class="dropdown">
+                                                        <a class="btn btn-sm btn-icon-only text-light" href="#"
+                                                            role="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <i class="fas fa-ellipsis-v"></i>
+                                                        </a>
+                                                        <div
+                                                            class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                            <?php if ($row['prod_available'] == 1) { ?>
+                                                            <a class="dropdown-item "
+                                                                href="adminMediater.php?action=disable&id=<?php echo $row['id']; ?>">Disable
+                                                                Service</a>
+                                                            <?php } elseif ($row['prod_available'] == 0) { ?>
+                                                            <a class="dropdown-item "
+                                                                href="adminMediater.php?action=enable&id=<?php echo $row['id']; ?>">Enable
+                                                                Service</a>
+                                                            <?php     }
+                                                                    ?>
+
+                                                            <a class="dropdown-item " href="#" data-toggle="modal"
+                                                                data-target="#editform<?php echo $row['id']; ?>">Edit</a>
+                                                            <a class="dropdown-item " href="#" data-toggle="modal"
+                                                                data-target="#deleteConfirm<?php echo $row['id']; ?>">Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <div class="modal fade" id="deleteConfirm<?php echo $row['id']; ?>"
+                                                tabindex="-1" role="dialog" aria-labelledby="modal-notification"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-danger modal-dialog-centered modal-"
+                                                    role="document">
+                                                    <div class="modal-content bg-gradient-danger">
+
+                                                        <div class="modal-body">
+
+                                                            <div class="p-0 text-center">
+                                                                <i class="ni ni-fat-remove ni-4x"></i>
+                                                                <h2 class="heading mt-4">SURE! You want to delete ?</h2>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a type="button" class="btn btn-white text-dark"
+                                                                href="adminMediater.php?action=delete&id=<?php echo $row['id']; ?>">DELETE</a>
+                                                            <button type="button"
+                                                                class="btn btn-link text-white ml-auto"
+                                                                data-dismiss="modal">Close</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
-                </div> <!-- Card footer -->
-                <div class="card-footer py-4">
-                    <nav aria-label="...">
-                        <ul class="pagination justify-content-end mb-0">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">
-                                    <i class="fas fa-angle-left"></i>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">
-                                    <i class="fas fa-angle-right"></i>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
+                                            <div class="modal fade" id="editform<?php echo $row['id']; ?>" tabindex="-1"
+                                                role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+                                                <div class="modal-dialog modal- modal-dialog-centered modal-sm"
+                                                    role="document">
+                                                    <div class="modal-content">
 
-    <!-- Footer -->
-    <?php include("footer.php"); ?>
+                                                        <div class="modal-body p-0">
+
+
+                                                            <div class="card bg-secondary shadow border-0">
+
+                                                                <div class="card-body px-lg-5 py-lg-5">
+                                                                    <div class="text-center text-muted mb-4">
+                                                                        <strong>Update Category</strong>
+                                                                    </div>
+                                                                    <form role="form" action="adminMediater.php"
+                                                                        method="POST">
+                                                                        <div class="form-group">
+                                                                            <label class="form-control-label">Parent
+                                                                                Category</label>
+                                                                            <div
+                                                                                class="input-group input-group-merge input-group-alternative mb-3">
+
+                                                                                <label class="form-control">
+                                                                                    <?php echo $parentName['prod_name']; ?>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="form-control-label">
+                                                                                Category</label>
+                                                                            <div
+                                                                                class="input-group input-group-merge input-group-alternative mb-3">
+                                                                                <input class="form-control"
+                                                                                    placeholder="Category" type="text"
+                                                                                    name="category"
+                                                                                    value="<?php echo $row['prod_name']; ?>">
+                                                                                <input type="hidden" name="cid"
+                                                                                    value="<?php echo $row['id']; ?>">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="form-control-label">
+                                                                                Link</label>
+                                                                            <div
+                                                                                class="input-group input-group-merge input-group-alternative mb-3">
+
+                                                                                <input class="form-control"
+                                                                                    placeholder="Link" type="text"
+                                                                                    name="link"
+                                                                                    value="<?php echo $row['link']; ?>">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="text-center">
+                                                                            <input type="submit"
+                                                                                class="btn btn-primary mt-3"
+                                                                                value="Update Category"
+                                                                                name="updateCategory">
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <?php
+                                                }
+                                            } ?>
+                                        </tbody>
+                                    </table>
+                                </div> <!-- Card footer -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Footer -->
+                    <?php include("footer.php"); ?>
