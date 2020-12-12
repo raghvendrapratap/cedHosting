@@ -7,6 +7,7 @@ if (!isset($_SESSION['userInfo'])) {
         header('Location: ../index.php');
     }
 }
+
 $filename = basename($_SERVER['REQUEST_URI']);
 $file = explode('?', $filename);
 // $hostingmenu = array('linuxhosting.php', 'wordpresshosting.php', 'windowshosting.php', 'cmshosting.php');
@@ -32,7 +33,7 @@ $file = explode('?', $filename);
     <!-- Argon CSS -->
     <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" type="text/css">
-
+    <link href="../css/customstyle.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 
 <body>
@@ -41,9 +42,10 @@ $file = explode('?', $filename);
         <div class="scrollbar-inner">
             <!-- Brand -->
             <div class="sidenav-header  align-items-center">
-                <a class="navbar-brand" href="javascript:void(0)">
-                    <img src="assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+                <a class="navbar-brand" href="index.php">
+                    <p class="h1" id="logop">Ced <span id="logospan">Hosting</span></p>
                 </a>
+
             </div>
             <div class="navbar-inner">
                 <!-- Collapse -->
