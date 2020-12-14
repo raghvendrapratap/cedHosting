@@ -9,6 +9,7 @@ $user = new user();
 
 ?>
 
+
 <div class="header bg-primary pb-6">
     <div class="container-fluid">
         <div class="header-body">
@@ -78,7 +79,7 @@ $user = new user();
                                                     <label class="form-control-label">Select Product
                                                         Category</label>
                                                     <!-- <input type="text" id="input-username" class="form-control" placeholder="Username" value="lucky.jesse"> -->
-                                                    <select name="categoryid" id="cid" class="form-control">
+                                                    <select name="categoryid" id="" class="form-control cid">
                                                         <option selected disabled value="">-- Select
                                                             Category --</option>
                                                         <?php
@@ -93,17 +94,18 @@ $user = new user();
                                                         <?php }
                                                             } ?>
                                                     </select>
-                                                    <label class="form-control-label text-danger" id="prodCategory">
+                                                    <label class="form-control-label text-danger prodCategory" id="">
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label class="form-control-label">Enter Product
-                                                        Name</label>
-                                                    <input type="text" id="pname" class="form-control"
-                                                        placeholder="Enter Product Name" name="pname">
-                                                    <label class="form-control-label text-danger" id="prodname">
+                                                        Name <span class="text-small text-muted">
+                                                            (Ex-Linux Hosting-001)</span></label>
+                                                    <input type="text" id="pname" class="form-control pname"
+                                                        placeholder="Enter Product Name" name="">
+                                                    <label class="form-control-label text-danger prodname" id="">
                                                     </label>
                                                 </div>
                                             </div>
@@ -113,9 +115,9 @@ $user = new user();
                                                 <div class="form-group">
                                                     <label class="form-control-label">Page
                                                         URL</label>
-                                                    <input type="text" class="form-control" placeholder="Page URL"
-                                                        name="url" id="url">
-                                                    <label class="form-control-label text-danger" id="urlid">
+                                                    <input type="text" class="form-control url" placeholder="Page URL"
+                                                        name="url" id="">
+                                                    <label class="form-control-label text-danger urlid" id="">
                                                     </label>
                                                 </div>
                                             </div>
@@ -132,20 +134,22 @@ $user = new user();
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label class="form-control-label">Enter Monthly
-                                                        Price</label>
-                                                    <input type="text" class="form-control" placeholder="ex: 23"
-                                                        name="mprice" id="mpriceid" maxlength="15">
-                                                    <label class="form-control-label text-danger" id="lablemprice">
+                                                        Price <span class="text-small text-muted">
+                                                            (Ex-99.99)</span></label>
+                                                    <input type="text" class="form-control mpriceid"
+                                                        placeholder="ex: 23" name="mprice" id="mpric" maxlength="15">
+                                                    <label class="form-control-label text-danger lablemprice" id="">
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label class="form-control-label">Enter Annual
-                                                        Price</label>
-                                                    <input type="text" class="form-control" placeholder="ex: 230"
-                                                        name="aprice" id="apriceid" maxlength="15">
-                                                    <label class="form-control-label text-danger" id="lableaprice">
+                                                        Price <span class="text-small text-muted">
+                                                            (Ex-99.99)</span></label>
+                                                    <input type="text" class="form-control apriceid"
+                                                        placeholder="ex: 230" name="aprice" id="" maxlength="15">
+                                                    <label class="form-control-label text-danger lableaprice" id="">
                                                     </label>
                                                 </div>
                                             </div>
@@ -153,10 +157,12 @@ $user = new user();
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">SKU</label>
-                                                    <input type="text" class="form-control" placeholder="SKU" name="sku"
-                                                        id="skuid">
-                                                    <label class="form-control-label text-danger" id="lablesku">
+                                                    <label class="form-control-label">SKU <span
+                                                            class="text-small text-muted">
+                                                            (Ex-#Li10)</span></label>
+                                                    <input type="text" class="form-control skuid" placeholder="SKU"
+                                                        name="sku" id="">
+                                                    <label class="form-control-label text-danger lablesku" id="">
                                                     </label>
                                                 </div>
                                             </div>
@@ -170,26 +176,28 @@ $user = new user();
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label class="form-control-label">Web Space(in
-                                                        GB)</label>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Web Space(in GB)" name="webspace" id="webid"
+                                                        GB) <span class="text-small text-muted">
+                                                            (Ex-5.5)</span></label>
+                                                    <input type="text" class="form-control webid"
+                                                        placeholder="Web Space(in GB)" name="webspace" id=""
                                                         maxlength="5">
                                                     <h6 class="heading-small text-muted mb-4">Enter 0.5 for
                                                         512 MB</h6>
-                                                    <label class="form-control-label text-danger" id="lableweb">
+                                                    <label class="form-control-label text-danger lableweb" id="">
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label class="form-control-label">Bandwidth (in
-                                                        GB)</label>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Bandwidth (in GB)" name="bandwidth" id="bandid"
+                                                        GB) <span class="text-small text-muted">
+                                                            (Ex-5.5)</span></label>
+                                                    <input type="text" class="form-control bandid"
+                                                        placeholder="Bandwidth (in GB)" name="bandwidth" id=""
                                                         maxlength="5">
                                                     <h6 class="heading-small text-muted mb-4">Enter 0.5 for
                                                         512 MB</h6>
-                                                    <label class="form-control-label text-danger" id="lableband">
+                                                    <label class="form-control-label text-danger lableband" id="">
                                                     </label>
                                                 </div>
                                             </div>
@@ -198,14 +206,15 @@ $user = new user();
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label class="form-control-label">Free
-                                                        Domain</label>
-                                                    <input type="text" class="form-control" placeholder="Free Domain"
-                                                        name="domain" id="domainid">
+                                                        Domain <span class="text-small text-muted">
+                                                            (Ex-5)</span></label>
+                                                    <input type="text" class="form-control domainid"
+                                                        placeholder="Free Domain" name="domain" id="">
                                                     <h6 class="heading-small text-muted mb-4">Enter 0 if no
                                                         domain available
                                                         in this service
                                                     </h6>
-                                                    <label class="form-control-label text-danger" id="labledomain">
+                                                    <label class="form-control-label text-danger labledomain" id="">
                                                     </label>
                                                 </div>
                                             </div>
@@ -214,12 +223,12 @@ $user = new user();
                                                     <label class="form-control-label">Language /
                                                         Technology
                                                         Support</label>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Language/Technology" name="lang" id="langid">
+                                                    <input type="text" class="form-control langid"
+                                                        placeholder="Language/Technology" name="lang" id="">
                                                     <h6 class="heading-small text-muted mb-4">Separate by
                                                         (,) Ex: PHP,
                                                         MySQL, MongoDB</h6>
-                                                    <label class="form-control-label text-danger" id="lablelang">
+                                                    <label class="form-control-label text-danger lablelang" id="">
                                                     </label>
                                                 </div>
                                             </div>
@@ -227,14 +236,16 @@ $user = new user();
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">Mailbox</label>
-                                                    <input type="text" class="form-control" placeholder="Mailbox"
-                                                        name="mailbox" id="mailid">
+                                                    <label class="form-control-label">Mailbox <span
+                                                            class="text-small text-muted">
+                                                            (Ex-5)</span></label>
+                                                    <input type="text" class="form-control mailid" placeholder="Mailbox"
+                                                        name="mailbox" id="">
                                                     <h6 class="heading-small text-muted mb-4">Enter Number
                                                         of mailbox will
                                                         be provided, enter 0
                                                         if none</h6>
-                                                    <label class="form-control-label text-danger" id="lablemail">
+                                                    <label class="form-control-label text-danger lablemail" id="">
                                                     </label>
                                                 </div>
                                             </div>

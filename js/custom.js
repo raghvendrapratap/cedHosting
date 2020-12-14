@@ -9,6 +9,7 @@ $(function() {
     $("#ansMsg").hide();
     $(".enteremailOTP").hide();
     $(".entermobOTP").hide();
+
     $(".onlynumber").bind("keypress", function(e) {
         var keyCode = e.which ? e.which : e.keyCode
 

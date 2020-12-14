@@ -137,6 +137,7 @@ if (isset($_POST['newproduct'])) {
 
 if (isset($_POST['updateproduct'])) {
 
+    $categoryid = isset($_POST['categoryid']) ? $_POST['categoryid'] : '';
     $pid = isset($_POST['pid']) ? $_POST['pid'] : '';
     $pname = isset($_POST['pname']) ? $_POST['pname'] : '';
     $url = isset($_POST['url']) ? $_POST['url'] : '';
@@ -147,6 +148,7 @@ if (isset($_POST['updateproduct'])) {
     $domain = isset($_POST['domain']) ? $_POST['domain'] : '';
     $lang = isset($_POST['lang']) ? $_POST['lang'] : '';
     $mailbox = isset($_POST['mailbox']) ? $_POST['mailbox'] : '';
+    $sku = isset($_POST['sku']) ? $_POST['sku'] : '';
 
     $prod_desc = array(
         "webspace" => $webspace,
@@ -158,11 +160,24 @@ if (isset($_POST['updateproduct'])) {
 
     $prod_desc_json = json_encode($prod_desc);
 
-    $addproduct = $product->updateProduct($pid, $pname, $url, $prod_desc_json, $mprice, $aprice, $dbconn->conn);
+    $addproduct = $product->updateProduct($sku, $categoryid, $pid, $pname, $url, $prod_desc_json, $mprice, $aprice, $dbconn->conn);
 
     if (isset($addproduct)) {
         header("Location:viewproduct.php?alert=update");
     } else {
         header("Location:viewproduct.php?alert=updateFail");
+    }
+}
+
+if (isset($_POST['action'])) {
+    if ($_POST['action'] == "checkcat") {
+
+        $cat = isset($_POST['cat']) ? $_POST['cat'] : '';
+
+        $cat = $product->checkcategory($cat, $dbconn->conn);
+
+        if (isset($cat)) {
+            echo "invalid";
+        }
     }
 }

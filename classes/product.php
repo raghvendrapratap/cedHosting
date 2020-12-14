@@ -6,7 +6,7 @@ class product
 {
     function allParentCategory($conn)
     {
-        $sql = "SELECT * from `tbl_product` WHERE `link` IS NULL";
+        $sql = "SELECT * from `tbl_product` WHERE `prod_parent_id`=0";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             return $result;
@@ -17,7 +17,7 @@ class product
     {
         date_default_timezone_set('Asia/Kolkata');
         $date = date('Y-m-d H:i');
-        $sql = "INSERT INTO `tbl_product` (`prod_parent_id`,`prod_name`,`link`,`prod_available`,`prod_launch_date`) VALUES($parentId, '$category', '$link',1,'$date')";
+        $sql = "INSERT INTO `tbl_product` (`prod_parent_id`,`prod_name`,`html`,`prod_available`,`prod_launch_date`) VALUES($parentId, '$category', '$link',1,'$date')";
         if ($conn->query($sql) === true) {
             return "Added";
         }
@@ -59,7 +59,7 @@ class product
 
     function updateCategory($id, $category, $link, $conn)
     {
-        $sql = "UPDATE `tbl_product` SET `prod_name`='$category',`link`='$link' WHERE `id`=$id";
+        $sql = "UPDATE `tbl_product` SET `prod_name`='$category',`html`='$link' WHERE `id`=$id";
         if ($conn->query($sql) === true) {
             return "Updated";
         }
@@ -70,7 +70,7 @@ class product
     {
         date_default_timezone_set('Asia/Kolkata');
         $date = date('Y-m-d H:i');
-        $sql = "INSERT INTO `tbl_product` (`prod_parent_id`,`prod_name`,`link`,`prod_available`,`prod_launch_date`) VALUES($categoryid, '$pname', '$url',1,'$date')";
+        $sql = "INSERT INTO `tbl_product` (`prod_parent_id`,`prod_name`,`html`,`prod_available`,`prod_launch_date`) VALUES($categoryid, '$pname', '$url',1,'$date')";
         if ($conn->query($sql) === true) {
             $last_id = $conn->insert_id;
             $sql = "INSERT INTO `tbl_product_description` ( `prod_id`, `description`, `mon_price`, `annual_price`, `sku`) VALUES($last_id, '$prod_desc_json', $mprice,$aprice,'$sku')";
@@ -88,6 +88,15 @@ class product
         }
     }
 
+    function showallProductofCategory($pid, $conn)
+    {
+        $sql = "SELECT * FROM `tbl_product` JOIN tbl_product_description ON tbl_product.id = tbl_product_description.prod_id where tbl_product.prod_parent_id=$pid;";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            return $result;
+        }
+    }
+
     function deleteProduct($id, $conn)
     {
 
@@ -97,16 +106,25 @@ class product
         }
     }
 
-    function updateProduct($pid, $pname, $url, $prod_desc_json, $mprice, $aprice, $conn)
+    function updateProduct($sku, $categoryid, $pid, $pname, $url, $prod_desc_json, $mprice, $aprice, $conn)
     {
-        $sql = "UPDATE `tbl_product` SET `prod_name`='$pname',`link`='$url' WHERE `id`=$pid ";
+        $sql = "UPDATE `tbl_product` SET `prod_parent_id`='$categoryid', `prod_name`='$pname',`html`='$url' WHERE `id`=$pid ";
 
         if ($conn->query($sql) === true) {
 
-            $sql = "  UPDATE `tbl_product_description` SET `description`='$prod_desc_json',`mon_price`=$mprice,`annual_price`=$aprice WHERE `prod_id`=$pid";
+            $sql = "  UPDATE `tbl_product_description` SET `description`='$prod_desc_json',`mon_price`=$mprice,`annual_price`=$aprice ,`sku`='$sku' WHERE `prod_id`=$pid";
             if ($conn->query($sql) === true) {
                 return "Updated";
             }
+        }
+    }
+
+    function checkcategory($cat, $conn)
+    {
+        $sql = "SELECT * FROM `tbl_product` where `prod_name`='$cat'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            return $result;
         }
     }
 }

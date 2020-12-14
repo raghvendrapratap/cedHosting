@@ -122,10 +122,9 @@ $hostingmenu = array('linuxhosting.php', 'wordpresshosting.php', 'windowshosting
                                     if (isset($category)) {
                                         while ($scategory = $category->fetch_assoc()) {
                                     ?>
-                                    <li class="<?php if ($file[0] == $scategory['link']) : ?> active<?php endif; ?>"><a
-                                            href="<?php echo $scategory['link'] ?>"><?php echo $scategory['prod_name'] ?></a>
+                                    <li class="<?php if ($file[0] == $scategory['html']) : ?> active<?php endif; ?>"><a
+                                            href="catpage.php?id=<?php echo $scategory['id']; ?>"><?php echo $scategory['prod_name'] ?></a>
                                     </li>
-
                                     <?php }
                                     } ?>
 

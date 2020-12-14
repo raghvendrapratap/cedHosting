@@ -92,7 +92,8 @@ $user = new user();
                                                 <div class="text-center text-muted mb-4">
                                                     <strong>Add Category</strong>
                                                 </div>
-                                                <form role="form" action="adminMediater.php" method="POST">
+                                                <form role="form" action="adminMediater.php" method="POST"
+                                                    name="catform" onsubmit="return validateCatForm()">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Parent
                                                             Category</label>
@@ -116,7 +117,9 @@ $user = new user();
                                                                     }
                                                                     ?>
                                                             </select>
+
                                                         </div>
+
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="form-control-label">
@@ -124,8 +127,10 @@ $user = new user();
                                                         <div
                                                             class="input-group input-group-merge input-group-alternative mb-3">
                                                             <input class="form-control" placeholder="Category"
-                                                                type="text" name="category">
+                                                                type="text" name="category" id="catid">
                                                         </div>
+                                                        <label class="form-control-label text-danger"
+                                                            id="catmsg"></label>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="form-control-label">
@@ -164,7 +169,7 @@ $user = new user();
                                                 <th scope="col" class="sort" data-sort="name">Category ID</th>
                                                 <th scope="col" class="sort" data-sort="name">Category Name</th>
                                                 <th scope="col" class="sort" data-sort="name">Parent Category</th>
-                                                <th scope="col" class="sort" data-sort="name">Link</th>
+                                                <!-- <th scope="col" class="sort" data-sort="name">Link</th> -->
                                                 <th scope="col" class="sort" data-sort="name">Status</th>
                                                 <th scope="col" class="sort" data-sort="completion">Launch Date</th>
                                                 <th scope="col">Action</th>
@@ -191,9 +196,9 @@ $user = new user();
                                                 <td>
                                                     <?php echo $parentName['prod_name']; ?>
                                                 </td>
-                                                <td>
-                                                    <?php echo $row['link']; ?>
-                                                </td>
+                                                <!-- <td>
+                                                    <?php echo $row['html']; ?>
+                                                </td> -->
                                                 <td>
                                                     <?php if ($row['prod_available'] == 1) {
                                                                 echo "Available";

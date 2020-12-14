@@ -78,8 +78,8 @@ $user = new user();
                                     <tr>
                                         <th scope="col" class="sort" data-sort="name">Product ID</th>
                                         <th scope="col" class="sort" data-sort="name">Product Name</th>
-                                        <th scope="col" class="sort" data-sort="name">Category</th>
-                                        <th scope="col" class="sort" data-sort="name">Link</th>
+                                        <th scope="col" class="sort" data-sort="name">Product Category</th>
+                                        <!-- <th scope="col" class="sort" data-sort="name">Link</th> -->
                                         <th scope="col" class="sort" data-sort="name">Status</th>
                                         <th scope="col" class="sort" data-sort="completion">Launch Date</th>
                                         <th scope="col" class="sort" data-sort="name">Webspace</th>
@@ -117,9 +117,9 @@ $user = new user();
                                         <td>
                                             <?php echo $parentName['prod_name']; ?>
                                         </td>
-                                        <td>
-                                            <?php echo $row['link']; ?>
-                                        </td>
+                                        <!-- <td>
+                                            <?php echo $row['html']; ?>
+                                        </td> -->
                                         <td>
                                             <?php if ($row['prod_available'] == 1) {
                                                             echo "Available";
@@ -173,7 +173,7 @@ $user = new user();
                                                     <?php     }
                                                                 ?>
 
-                                                    <a class="dropdown-item " href="#" data-toggle="modal"
+                                                    <a class="dropdown-item edit" href="#" data-toggle="modal"
                                                         data-target="#editform<?php echo $row['prod_id']; ?>">Edit</a>
                                                     <a class="dropdown-item " href="#" data-toggle="modal"
                                                         data-target="#deleteConfirm<?php echo $row['prod_id']; ?>">Delete</a>
@@ -217,7 +217,8 @@ $user = new user();
                                                             <h1 class="display-3 text-muted">Update Product</h1>
                                                         </div>
                                                     </div>
-                                                    <form action="adminMediater.php" method="POST">
+                                                    <form action="adminMediater.php" method="POST"
+                                                        onsubmit="return validateUpdateProdForm()">
                                                         <h2 class="heading-large text-muted mb-4">Enter Product Details
                                                         </h2>
                                                         <div class="pl-lg-4">
@@ -225,26 +226,45 @@ $user = new user();
                                                                 <div class="col-lg-6">
                                                                     <div class="form-group">
                                                                         <label class="form-control-label">Select Product
-                                                                            Category</label>
-                                                                        <div
-                                                                            class="input-group input-group-merge input-group-alternative mb-3">
-
-                                                                            <label class="form-control">
-                                                                                <?php echo $parentName['prod_name']; ?>
-                                                                            </label>
-                                                                        </div>
+                                                                            Category </label>
+                                                                        <select name="categoryid"
+                                                                            class="form-control cid">
+                                                                            <option selected disabled value="">-- Select
+                                                                                Category --</option>
+                                                                            <?php
+                                                                                        $pid = 1;
+                                                                                        $product2 = new product();
+                                                                                        $category = $product2->showCategory($pid, $dbconn->conn);
+                                                                                        if (isset($category)) {
+                                                                                            while ($showcategory = $category->fetch_assoc()) {
+                                                                                        ?>
+                                                                            <option
+                                                                                value="<?php echo $showcategory['id'] ?>"
+                                                                                <?php if ($showcategory['id'] == $parentName['id']) {
+                                                                                                                                                        echo "selected";
+                                                                                                                                                    }; ?>>
+                                                                                <?php echo $showcategory['prod_name'] ?>
+                                                                            </option>
+                                                                            <?php }
+                                                                                        } ?>
+                                                                        </select>
+                                                                        <label
+                                                                            class="form-control-label text-danger prodCategory">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6">
                                                                     <div class="form-group">
                                                                         <label class="form-control-label">Enter Product
-                                                                            Name</label>
-                                                                        <input type="text" id="" class="form-control"
+                                                                            Name </label>
+                                                                        <input type="text" class="form-control pname"
                                                                             placeholder="Enter Product Name"
                                                                             name="pname"
                                                                             value="<?php echo $row['prod_name']; ?>">
                                                                         <input type="hidden" name="pid"
                                                                             value="<?php echo $row['prod_id']; ?>">
+                                                                        <span
+                                                                            class="form-control-label text-danger prodname">
+                                                                        </span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -253,9 +273,14 @@ $user = new user();
                                                                     <div class="form-group">
                                                                         <label class="form-control-label">Page
                                                                             URL</label>
-                                                                        <input type="text" class="form-control"
+                                                                        <input type="text" id=""
+                                                                            class="form-control url"
                                                                             placeholder="Page URL" name="url"
-                                                                            value="<?php echo $row['link']; ?>">
+                                                                            value="<?php echo $row['html']; ?>">
+                                                                        <label
+                                                                            class="form-control-label text-danger urlid"
+                                                                            id="">
+                                                                        </label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -272,18 +297,28 @@ $user = new user();
                                                                     <div class="form-group">
                                                                         <label class="form-control-label">Enter Monthly
                                                                             Price</label>
-                                                                        <input type="text" class="form-control"
+                                                                        <input type="text" class="form-control mpriceid"
                                                                             placeholder="ex: 23" name="mprice"
-                                                                            value="<?php echo $row['mon_price']; ?>">
+                                                                            value="<?php echo $row['mon_price']; ?>"
+                                                                            id="" maxlength="15">
+                                                                        <label
+                                                                            class="form-control-label text-danger lablemprice"
+                                                                            id="">
+                                                                        </label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6">
                                                                     <div class="form-group">
                                                                         <label class="form-control-label">Enter Annual
                                                                             Price</label>
-                                                                        <input type="text" class="form-control"
+                                                                        <input type="text" class="form-control apriceid"
                                                                             placeholder="ex: 230" name="aprice"
-                                                                            value="<?php echo $row['annual_price']; ?>">
+                                                                            value="<?php echo $row['annual_price']; ?>"
+                                                                            id="" maxlength="15">
+                                                                        <label
+                                                                            class="form-control-label text-danger lableaprice"
+                                                                            id="">
+                                                                        </label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -291,16 +326,13 @@ $user = new user();
                                                                 <div class="col-lg-6">
                                                                     <div class="form-group">
                                                                         <label class="form-control-label">SKU</label>
-                                                                        <!-- <input type="text" class="form-control"
+                                                                        <input type="text" class="form-control skuid"
                                                                             placeholder="SKU" name="sku"
-                                                                            value="<?php echo $row['sku']; ?>"> -->
-                                                                        <div
-                                                                            class="input-group input-group-merge input-group-alternative mb-3">
-
-                                                                            <label class="form-control">
-                                                                                <?php echo $row['sku']; ?>
-                                                                            </label>
-                                                                        </div>
+                                                                            value="<?php echo $row['sku']; ?>" id="">
+                                                                        <label
+                                                                            class="form-control-label text-danger lablesku"
+                                                                            id="">
+                                                                        </label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -314,26 +346,35 @@ $user = new user();
                                                                     <div class="form-group">
                                                                         <label class="form-control-label">Web Space(in
                                                                             GB)</label>
-                                                                        <input type="text" class="form-control"
+                                                                        <input type="text" class="form-control webid"
                                                                             placeholder="Web Space(in GB)"
                                                                             name="webspace"
-                                                                            value="<?php echo $desc->webspace; ?>">
+                                                                            value="<?php echo $desc->webspace; ?>" id=""
+                                                                            maxlength="5">
                                                                         <h6 class="heading-small text-muted mb-4">Enter
                                                                             0.5 for
                                                                             512 MB</h6>
+                                                                        <label
+                                                                            class="form-control-label text-danger lableweb"
+                                                                            id="">
+                                                                        </label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6">
                                                                     <div class="form-group">
                                                                         <label class="form-control-label">Bandwidth (in
                                                                             GB)</label>
-                                                                        <input type="text" class="form-control"
+                                                                        <input type="text" class="form-control bandid"
                                                                             placeholder="Bandwidth (in GB)"
                                                                             name="bandwidth"
-                                                                            value="<?php echo $desc->bandwidth; ?>">
+                                                                            value="<?php echo $desc->bandwidth; ?>"
+                                                                            id="" maxlength="5">
                                                                         <h6 class="heading-small text-muted mb-4">Enter
                                                                             0.5 for
-                                                                            512 MB</h6>
+                                                                            512 MB</h6> <label
+                                                                            class="form-control-label text-danger lableband"
+                                                                            id="">
+                                                                        </label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -342,14 +383,18 @@ $user = new user();
                                                                     <div class="form-group">
                                                                         <label class="form-control-label">Free
                                                                             Domain</label>
-                                                                        <input type="text" class="form-control"
+                                                                        <input type="text" class="form-control domainid"
                                                                             placeholder="Free Domain" name="domain"
-                                                                            value="<?php echo $desc->domain; ?>">
+                                                                            value="<?php echo $desc->domain; ?>" id="">
                                                                         <h6 class="heading-small text-muted mb-4">Enter
                                                                             0 if no
                                                                             domain available
                                                                             in this service
                                                                         </h6>
+                                                                        <label
+                                                                            class="form-control-label text-danger labledomain"
+                                                                            id="">
+                                                                        </label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6">
@@ -357,14 +402,18 @@ $user = new user();
                                                                         <label class="form-control-label">Language /
                                                                             Technology
                                                                             Support</label>
-                                                                        <input type="text" class="form-control"
+                                                                        <input type="text" class="form-control langid"
                                                                             placeholder="Language/Technology"
                                                                             name="lang"
-                                                                            value="<?php echo $desc->lang; ?>">
+                                                                            value="<?php echo $desc->lang; ?>" id="">
                                                                         <h6 class="heading-small text-muted mb-4">
                                                                             Separate by
                                                                             (,) Ex: PHP,
                                                                             MySQL, MongoDB</h6>
+                                                                        <label
+                                                                            class="form-control-label text-danger lablelang"
+                                                                            id="">
+                                                                        </label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -373,14 +422,18 @@ $user = new user();
                                                                     <div class="form-group">
                                                                         <label
                                                                             class="form-control-label">Mailbox</label>
-                                                                        <input type="text" class="form-control"
+                                                                        <input type="text" class="form-control mailid"
                                                                             placeholder="Mailbox" name="mailbox"
-                                                                            value="<?php echo $desc->mailbox; ?>">
+                                                                            value="<?php echo $desc->mailbox; ?>" id="">
                                                                         <h6 class="heading-small text-muted mb-4">Enter
                                                                             Number
                                                                             of mailbox will
                                                                             be provided, enter 0
                                                                             if none</h6>
+                                                                        <label
+                                                                            class="form-control-label text-danger lablemail"
+                                                                            id="">
+                                                                        </label>
                                                                     </div>
                                                                 </div>
                                                             </div>
