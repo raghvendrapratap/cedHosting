@@ -111,7 +111,7 @@ $hostingmenu = array('linuxhosting.php', 'wordpresshosting.php', 'windowshosting
                                     href="about.php">About</a></li>
                             <li class="<?php if ($file[0] == "services.php") : ?> active<?php endif; ?>"><a
                                     href="services.php">Services</a></li>
-                            <li class="dropdown <?php if (in_array($file[0], $hostingmenu)) : ?> active<?php endif; ?>">
+                            <li class="dropdown <?php if ($file[0] == "catpage.php") : ?> active<?php endif; ?>">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                     aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
                                 <ul class="dropdown-menu">
@@ -122,7 +122,7 @@ $hostingmenu = array('linuxhosting.php', 'wordpresshosting.php', 'windowshosting
                                     if (isset($category)) {
                                         while ($scategory = $category->fetch_assoc()) {
                                     ?>
-                                    <li class="<?php if ($file[0] == $scategory['html']) : ?> active<?php endif; ?>"><a
+                                    <li class="<?php if ($_GET['id'] == $scategory['id']) : ?> active<?php endif; ?>"><a
                                             href="catpage.php?id=<?php echo $scategory['id']; ?>"><?php echo $scategory['prod_name'] ?></a>
                                     </li>
                                     <?php }

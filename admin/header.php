@@ -21,7 +21,7 @@ $file = explode('?', $filename);
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
     <meta name="author" content="Creative Tim">
-    <title>Admin Dashboard</title>
+    <title>CedHosting || Admin</title>
     <!-- Favicon -->
     <link rel="icon" href="assets/img/brand/favicon.png" type="image/png">
     <!-- Fonts -->
@@ -66,25 +66,25 @@ $file = explode('?', $filename);
                         </li>
                         <ul class="nav-item">
                             <a class="nav-link" href="category.php">
-                                <i class="ni ni-fat-add text-primary"></i>
+                                <i class="ni ni-fat-add fa-lg text-primary "></i>
                                 <span class="nav-link-text">Create category</span>
                             </a>
                         </ul>
                         <ul class="nav-item">
                             <a class="nav-link" href="addproduct.php">
-                                <i class="ni ni-single-02 text-yellow"></i>
+                                <i class="fa fa-plus-square text-primary" aria-hidden="true"></i>
                                 <span class="nav-link-text">Add Product</span>
                             </a>
                         </ul>
                         <ul class="nav-item">
                             <a class="nav-link" href="viewproduct.php">
-                                <i class="ni ni-single-02 text-yellow"></i>
+                                <i class="fa fa-eye text-primary" aria-hidden="true"></i>
                                 <span class="nav-link-text">View Product</span>
                             </a>
                         </ul>
                         <ul class="nav-item">
                             <a class="nav-link" href="">
-                                <i class="ni ni-single-02 text-yellow"></i>
+                                <i class="fa fa-percent text-primary" aria-hidden="true"></i>
                                 <span class="nav-link-text">Create New offers</span>
                             </a>
                         </ul>

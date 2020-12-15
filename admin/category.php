@@ -166,7 +166,8 @@ $user = new user();
                                     <table class="table align-items-center table-flush ctable">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th scope="col" class="sort" data-sort="name">Category ID</th>
+                                                <!-- <th scope="col" class="sort" data-sort="name">Category ID</th> -->
+                                                <th scope="col" class="sort" data-sort="name">S.No.</th>
                                                 <th scope="col" class="sort" data-sort="name">Category Name</th>
                                                 <th scope="col" class="sort" data-sort="name">Parent Category</th>
                                                 <!-- <th scope="col" class="sort" data-sort="name">Link</th> -->
@@ -179,17 +180,22 @@ $user = new user();
 
                                             <?php
                                             $pid = 1;
+                                            $sNo = 0;
                                             $category = $product->showCategory($pid, $dbconn->conn);
                                             if (isset($category)) {
                                                 while ($row = $category->fetch_assoc()) {
+                                                    $sNo += 1;
                                                     $pid =  $row['prod_parent_id'];
                                                     $pname = $product->detailCategory($pid, $dbconn->conn);
                                                     $parentName = $pname->fetch_assoc();
                                             ?>
                                             <tr>
                                                 <td class="budget">
-                                                    <?php echo $row['id']; ?>
+                                                    <?php echo $sNo; ?>
                                                 </td>
+                                                <!-- <td class="budget">
+                                                    <?php echo $row['id']; ?>
+                                                </td> -->
                                                 <td>
                                                     <?php echo $row['prod_name']; ?>
                                                 </td>
@@ -220,12 +226,12 @@ $user = new user();
                                                         <div
                                                             class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                             <?php if ($row['prod_available'] == 1) { ?>
-                                                            <a class="dropdown-item "
-                                                                href="adminMediater.php?action=disable&id=<?php echo $row['id']; ?>">Disable
+                                                            <a class="dropdown-item " href="#" data-toggle="modal"
+                                                                data-target="#disableConfirm<?php echo $row['id']; ?>">Disable
                                                                 Service</a>
                                                             <?php } elseif ($row['prod_available'] == 0) { ?>
-                                                            <a class="dropdown-item "
-                                                                href="adminMediater.php?action=enable&id=<?php echo $row['id']; ?>">Enable
+                                                            <a class="dropdown-item " href="#" data-toggle="modal"
+                                                                data-target="#enableConfirm<?php echo $row['id']; ?>">Enable
                                                                 Service</a>
                                                             <?php     }
                                                                     ?>
@@ -238,6 +244,61 @@ $user = new user();
                                                     </div>
                                                 </td>
                                             </tr>
+
+                                            <div class="modal fade" id="disableConfirm<?php echo $row['id']; ?>"
+                                                tabindex="-1" role="dialog" aria-labelledby="modal-notification"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-info modal-dialog-centered modal-"
+                                                    role="document">
+                                                    <div class="modal-content bg-gradient-info">
+
+                                                        <div class="modal-body">
+
+                                                            <div class="p-0 text-center">
+                                                                <i class="ni ni-bell-55 ni-4x"></i>
+                                                                <h2 class="heading mt-4">SURE! You want to Disable
+                                                                    <?php echo $row['prod_name']; ?> ?</h2>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a type="button" class="btn btn-white text-dark"
+                                                                href="adminMediater.php?action=disable&id=<?php echo $row['id']; ?>">Disable</a>
+                                                            <button type="button"
+                                                                class="btn btn-link text-white ml-auto"
+                                                                data-dismiss="modal">Close</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="modal fade" id="enableConfirm<?php echo $row['id']; ?>"
+                                                tabindex="-1" role="dialog" aria-labelledby="modal-notification"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-info modal-dialog-centered modal-"
+                                                    role="document">
+                                                    <div class="modal-content bg-gradient-info">
+
+                                                        <div class="modal-body">
+
+                                                            <div class="p-0 text-center">
+                                                                <i class="ni ni-bell-55 ni-4x"></i>
+                                                                <h2 class="heading mt-4">SURE! You want to Enable
+                                                                    <?php echo $row['prod_name']; ?> ?</h2>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a type="button" class="btn btn-white text-dark"
+                                                                href="adminMediater.php?action=enable&id=<?php echo $row['id']; ?>">Enable</a>
+                                                            <button type="button"
+                                                                class="btn btn-link text-white ml-auto"
+                                                                data-dismiss="modal">Close</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <div class="modal fade" id="deleteConfirm<?php echo $row['id']; ?>"
                                                 tabindex="-1" role="dialog" aria-labelledby="modal-notification"
@@ -271,13 +332,11 @@ $user = new user();
                                                 <div class="modal-dialog modal- modal-dialog-centered modal-sm"
                                                     role="document">
                                                     <div class="modal-content">
-
                                                         <div class="modal-body p-0">
-
-
                                                             <div class="card bg-secondary shadow border-0">
-
-                                                                <div class="card-body px-lg-5 py-lg-5">
+                                                                <button type="button" class="close ml-auto pt-3 pr-4"
+                                                                    data-dismiss="modal">&times;</button>
+                                                                <div class="card-body px-lg-3 py-lg-3">
                                                                     <div class="text-center text-muted mb-4">
                                                                         <strong>Update Category</strong>
                                                                     </div>
@@ -309,14 +368,14 @@ $user = new user();
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label class="form-control-label">
-                                                                                Link</label>
+                                                                                Html</label>
                                                                             <div
                                                                                 class="input-group input-group-merge input-group-alternative mb-3">
 
                                                                                 <input class="form-control"
-                                                                                    placeholder="Link" type="text"
+                                                                                    placeholder="Html" type="text"
                                                                                     name="link"
-                                                                                    value="<?php echo $row['link']; ?>">
+                                                                                    value="<?php echo htmlspecialchars($row['html']); ?>">
                                                                             </div>
                                                                         </div>
 

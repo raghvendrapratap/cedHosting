@@ -157,8 +157,6 @@ function validateForm() {
         }
     }
 
-    // (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
-
     if (email == "") {
         $("#emailMsg").html("*Enter mail");
         $("#emailMsg").show();
@@ -183,7 +181,7 @@ function validateForm() {
         $("#passMsg").show();
         return false;
     } else if (!pass.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,16}$/)) {
-        $("#passMsg").html("*Password must contain uppercase, lowercase, special character and numeric value AND length is 8 to 12.");
+        $("#passMsg").html("*Password must contain uppercase, lowercase, special character and numeric value AND length is 8 to 16.");
         $("#passMsg").show();
         return false;
     }

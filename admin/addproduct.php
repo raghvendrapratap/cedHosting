@@ -103,8 +103,8 @@ $user = new user();
                                                     <label class="form-control-label">Enter Product
                                                         Name <span class="text-small text-muted">
                                                             (Ex-Linux Hosting-001)</span></label>
-                                                    <input type="text" id="pname" class="form-control pname"
-                                                        placeholder="Enter Product Name" name="">
+                                                    <input type="text" class="form-control pname"
+                                                        placeholder="Enter Product Name" name="pname">
                                                     <label class="form-control-label text-danger prodname" id="">
                                                     </label>
                                                 </div>

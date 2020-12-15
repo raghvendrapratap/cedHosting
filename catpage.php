@@ -1,5 +1,4 @@
 <?php
-
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 } else {
@@ -25,8 +24,8 @@ if (isset($_GET['id'])) {
 
     <div class="tab-prices">
         <div class="container">
-            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
-                <ul id="myTab" class="nav nav-tabs left-tab" role="tablist">
+            <div id="plans" class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab" class="nav left-tab" role="tablist">
                     <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab"
                             aria-controls="home" aria-expanded="true">IN Hosting</a></li>
                     <!-- <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab"
@@ -52,7 +51,7 @@ if (isset($_GET['id'])) {
                                 <div class="linux-bottom">
                                     <h5 class="">$<?php echo $row['mon_price']; ?> <span class="month">per
                                             month</span></h5>
-                                    <h6 class="small">$<?php echo $row['annual_price']; ?> <span class="month">per
+                                    <h6>$<?php echo $row['annual_price']; ?> <span class="month">per
                                             annum</span></h6>
                                     <h5><?php echo $desc->domain; ?> Domain</h5>
                                     <ul>
@@ -95,7 +94,7 @@ if (isset($_GET['id'])) {
     <!-- clients -->
     <div class="whatdo">
         <div class="container">
-            <h3>Linux Features</h3>
+            <h3><?php echo $scategory['prod_name']; ?> Features</h3>
             <div class="what-grids">
                 <div class="col-md-4 what-grid">
                     <div class="what-left">

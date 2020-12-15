@@ -24,6 +24,7 @@ $(".edit").click(function() {
     $up8 = "valid";
     $up9 = "valid";
     $up10 = "valid";
+
     $(".prodCategory").hide();
     $(".prodname").hide();
     $(".lablemprice").hide();
@@ -99,7 +100,7 @@ $(".mpriceid").focusout(function() {
         $(".lablemprice").html("*Enter Monthly Price");
         $(".lablemprice").show();
         $(this).css('border', 'solid 3px red');
-    } else if (!$mprice.match(/^[0-9]\d*(\.\d{1,2})?$/)) {
+    } else if (!$mprice.match(/^[0-9]\d*(\.\d*)?$/)) {
         $(".lablemprice").html("*Price can be only integer and only one dot(.) allowed");
         $(".lablemprice").show();
         $(this).css('border', 'solid 3px red');
@@ -127,7 +128,7 @@ $(".apriceid").focusout(function() {
         $(".lableaprice").html("*Enter annual Price");
         $(".lableaprice").show();
         $(this).css('border', 'solid 3px red');
-    } else if (!$aprice.match(/^[0-9]\d*(\.\d{1,2})?$/)) {
+    } else if (!$aprice.match(/^[0-9]\d*(\.\d*)?$/)) {
         $(".lableaprice").html("*Price can be only integer and only one dot(.) allowed");
         $(".lableaprice").show();
         $(this).css('border', 'solid 3px red');
@@ -175,7 +176,7 @@ $(".webid").focusout(function() {
         $(".lableweb").html("*Enter web space.");
         $(".lableweb").show();
         $(this).css('border', 'solid 3px red');
-    } else if (!$web.match(/^[0-9]\d*(\.\d{1})?$/)) {
+    } else if (!$web.match(/^[0-9]\d*(\.\d*)?$/)) {
         $(".lableweb").html("*Web Space can be only integer and only one dot(.) allowed");
         $(".lableweb").show();
         $(this).css('border', 'solid 3px red');
@@ -201,7 +202,7 @@ $(".bandid").focusout(function() {
         $(".lableband").html("*Enter  bandwidth.");
         $(".lableband").show();
         $(this).css('border', 'solid 3px red');
-    } else if (!$band.match(/^[0-9]\d*(\.\d{1})?$/)) {
+    } else if (!$band.match(/^[0-9]\d*(\.\d*)?$/)) {
         $(".lableband").html("*Bandwidth can be only integer and only one dot(.) allowed");
         $(".lableband").show();
         $(this).css('border', 'solid 3px red');

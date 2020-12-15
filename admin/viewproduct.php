@@ -273,13 +273,11 @@ $user = new user();
                                                                     <div class="form-group">
                                                                         <label class="form-control-label">Page
                                                                             URL</label>
-                                                                        <input type="text" id=""
-                                                                            class="form-control url"
+                                                                        <input type="text" class="form-control url"
                                                                             placeholder="Page URL" name="url"
                                                                             value="<?php echo $row['html']; ?>">
                                                                         <label
-                                                                            class="form-control-label text-danger urlid"
-                                                                            id="">
+                                                                            class="form-control-label text-danger urlid">
                                                                         </label>
                                                                     </div>
                                                                 </div>
@@ -300,10 +298,9 @@ $user = new user();
                                                                         <input type="text" class="form-control mpriceid"
                                                                             placeholder="ex: 23" name="mprice"
                                                                             value="<?php echo $row['mon_price']; ?>"
-                                                                            id="" maxlength="15">
+                                                                            maxlength="15">
                                                                         <label
-                                                                            class="form-control-label text-danger lablemprice"
-                                                                            id="">
+                                                                            class="form-control-label text-danger lablemprice">
                                                                         </label>
                                                                     </div>
                                                                 </div>
@@ -314,10 +311,9 @@ $user = new user();
                                                                         <input type="text" class="form-control apriceid"
                                                                             placeholder="ex: 230" name="aprice"
                                                                             value="<?php echo $row['annual_price']; ?>"
-                                                                            id="" maxlength="15">
+                                                                            maxlength="15">
                                                                         <label
-                                                                            class="form-control-label text-danger lableaprice"
-                                                                            id="">
+                                                                            class="form-control-label text-danger lableaprice">
                                                                         </label>
                                                                     </div>
                                                                 </div>
@@ -328,10 +324,9 @@ $user = new user();
                                                                         <label class="form-control-label">SKU</label>
                                                                         <input type="text" class="form-control skuid"
                                                                             placeholder="SKU" name="sku"
-                                                                            value="<?php echo $row['sku']; ?>" id="">
+                                                                            value="<?php echo $row['sku']; ?>">
                                                                         <label
-                                                                            class="form-control-label text-danger lablesku"
-                                                                            id="">
+                                                                            class="form-control-label text-danger lablesku">
                                                                         </label>
                                                                     </div>
                                                                 </div>
@@ -349,14 +344,13 @@ $user = new user();
                                                                         <input type="text" class="form-control webid"
                                                                             placeholder="Web Space(in GB)"
                                                                             name="webspace"
-                                                                            value="<?php echo $desc->webspace; ?>" id=""
+                                                                            value="<?php echo $desc->webspace; ?>"
                                                                             maxlength="5">
                                                                         <h6 class="heading-small text-muted mb-4">Enter
                                                                             0.5 for
                                                                             512 MB</h6>
                                                                         <label
-                                                                            class="form-control-label text-danger lableweb"
-                                                                            id="">
+                                                                            class="form-control-label text-danger lableweb">
                                                                         </label>
                                                                     </div>
                                                                 </div>
@@ -368,12 +362,11 @@ $user = new user();
                                                                             placeholder="Bandwidth (in GB)"
                                                                             name="bandwidth"
                                                                             value="<?php echo $desc->bandwidth; ?>"
-                                                                            id="" maxlength="5">
+                                                                            maxlength="5">
                                                                         <h6 class="heading-small text-muted mb-4">Enter
                                                                             0.5 for
                                                                             512 MB</h6> <label
-                                                                            class="form-control-label text-danger lableband"
-                                                                            id="">
+                                                                            class="form-control-label text-danger lableband">
                                                                         </label>
                                                                     </div>
                                                                 </div>
@@ -385,15 +378,14 @@ $user = new user();
                                                                             Domain</label>
                                                                         <input type="text" class="form-control domainid"
                                                                             placeholder="Free Domain" name="domain"
-                                                                            value="<?php echo $desc->domain; ?>" id="">
+                                                                            value="<?php echo $desc->domain; ?>">
                                                                         <h6 class="heading-small text-muted mb-4">Enter
                                                                             0 if no
                                                                             domain available
                                                                             in this service
                                                                         </h6>
                                                                         <label
-                                                                            class="form-control-label text-danger labledomain"
-                                                                            id="">
+                                                                            class="form-control-label text-danger labledomain">
                                                                         </label>
                                                                     </div>
                                                                 </div>
@@ -405,14 +397,13 @@ $user = new user();
                                                                         <input type="text" class="form-control langid"
                                                                             placeholder="Language/Technology"
                                                                             name="lang"
-                                                                            value="<?php echo $desc->lang; ?>" id="">
+                                                                            value="<?php echo $desc->lang; ?>">
                                                                         <h6 class="heading-small text-muted mb-4">
                                                                             Separate by
                                                                             (,) Ex: PHP,
                                                                             MySQL, MongoDB</h6>
                                                                         <label
-                                                                            class="form-control-label text-danger lablelang"
-                                                                            id="">
+                                                                            class="form-control-label text-danger lablelang">
                                                                         </label>
                                                                     </div>
                                                                 </div>
@@ -424,15 +415,14 @@ $user = new user();
                                                                             class="form-control-label">Mailbox</label>
                                                                         <input type="text" class="form-control mailid"
                                                                             placeholder="Mailbox" name="mailbox"
-                                                                            value="<?php echo $desc->mailbox; ?>" id="">
+                                                                            value="<?php echo $desc->mailbox; ?>">
                                                                         <h6 class="heading-small text-muted mb-4">Enter
                                                                             Number
                                                                             of mailbox will
                                                                             be provided, enter 0
                                                                             if none</h6>
                                                                         <label
-                                                                            class="form-control-label text-danger lablemail"
-                                                                            id="">
+                                                                            class="form-control-label text-danger lablemail">
                                                                         </label>
                                                                     </div>
                                                                 </div>
