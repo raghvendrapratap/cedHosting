@@ -1,6 +1,10 @@
 <?php
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+    if ($_GET['id'] != "" || $_GET['id'] != null) {
+        $id = $_GET['id'];
+    } else {
+        header("Location:index.php");
+    }
 } else {
     header("Location:index.php");
 }
@@ -62,7 +66,8 @@ if (isset($_GET['id'])) {
                                         <li><strong>location</strong> : <img src="images/india.png"></li>
                                     </ul>
                                 </div>
-                                <a href="#">buy now</a>
+                                <a href="mediater.php?idp=<?php echo $id; ?>&addcartid=<?php echo $row['id']; ?>">buy
+                                    now</a>
                             </div>
 
                             <?php } else {

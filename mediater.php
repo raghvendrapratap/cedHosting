@@ -150,3 +150,17 @@ if (isset($_POST['varifyEmail'])) {
         echo "<script type='text/javascript'>alert('Invalid OTP! Please try again'); window.location='varification.php';</script>";
     }
 }
+
+if (isset($_GET['addcartid'])) {
+
+    if (!isset($_SESSION['cartArray'])) {
+        $_SESSION['cartArray'] = array();
+    }
+    $id = isset($_GET['addcartid']) ? $_GET['addcartid'] : '';
+    $idp = isset($_GET['idp']) ? $_GET['idp'] : '';
+
+    $cartprod = array("id" => $id, "quant" => 1);
+    array_push($_SESSION['cartArray'], $cartprod);
+
+    header("location:catpage.php?id=$idp");
+}

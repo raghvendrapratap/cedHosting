@@ -146,8 +146,15 @@ $hostingmenu = array('linuxhosting.php', 'wordpresshosting.php', 'windowshosting
                                     href="login.php">Login</a></li>
                             <?php }
                             ?>
-                            <li class="<?php if ($file[0] == "cart.php") : ?> active<?php endif; ?>"><a id="icart"
-                                    href="cart.php"><i class="fa fa-cart-plus"></i></a></li>
+                            <li class="<?php if ($file[0] == "cart.php") : ?> active<?php endif; ?>"><span
+                                    class="badge cartspan">
+                                    <?php if (isset($_SESSION['cartArray'])) {
+                                        echo count($_SESSION['cartArray']);
+                                    } else {
+                                        echo 0;
+                                    }
+                                    ?>
+                                </span><a id="icart" href="cart.php"><i class="fa fa-cart-plus"></i></a></li>
                         </ul>
 
                     </div>

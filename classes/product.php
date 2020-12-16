@@ -127,4 +127,12 @@ class product
             return $result;
         }
     }
+    function showProductDetail($id, $conn)
+    {
+        $sql = "SELECT * FROM `tbl_product` JOIN tbl_product_description ON tbl_product.id = tbl_product_description.prod_id where tbl_product_description.id=$id;";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            return $result;
+        }
+    }
 }

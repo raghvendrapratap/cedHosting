@@ -76,7 +76,7 @@ $user = new user();
                             <table class="table align-items-center table-flush ctable">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col" class="sort" data-sort="name">Product ID</th>
+                                        <th scope="col" class="sort" data-sort="name">S. No.</th>
                                         <th scope="col" class="sort" data-sort="name">Product Name</th>
                                         <th scope="col" class="sort" data-sort="name">Product Category</th>
                                         <!-- <th scope="col" class="sort" data-sort="name">Link</th> -->
@@ -97,10 +97,12 @@ $user = new user();
                                 <tbody class="list">
 
                                     <?php
+                                        $sNo = 0;
                                         $pid = 1;
                                         $product = $product->showProduct($dbconn->conn);
                                         if (isset($product)) {
                                             while ($row = $product->fetch_assoc()) {
+                                                $sNo += 1;
                                                 $desc = json_decode($row['description']);
                                                 $parentid =  $row['prod_parent_id'];
                                                 $product1 = new product();
@@ -109,7 +111,8 @@ $user = new user();
                                         ?>
                                     <tr>
                                         <td class="budget">
-                                            <?php echo $row['prod_id']; ?>
+                                            <!-- <?php echo $row['prod_id']; ?> -->
+                                            <?php echo $sNo; ?>
                                         </td>
                                         <td>
                                             <?php echo $row['prod_name']; ?>
@@ -163,12 +166,12 @@ $user = new user();
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                     <?php if ($row['prod_available'] == 1) { ?>
-                                                    <a class="dropdown-item "
-                                                        href="adminMediater.php?action=disableprod&id=<?php echo $row['prod_id']; ?>">Disable
+                                                    <a class="dropdown-item " href="#" data-toggle="modal"
+                                                        data-target="#disableConfirm<?php echo $row['prod_id']; ?>">Disable
                                                         Service</a>
                                                     <?php } elseif ($row['prod_available'] == 0) { ?>
-                                                    <a class="dropdown-item "
-                                                        href="adminMediater.php?action=enableprod&id=<?php echo $row['prod_id']; ?>">Enable
+                                                    <a class="dropdown-item " href="#" data-toggle="modal"
+                                                        data-target="#enableConfirm<?php echo $row['prod_id']; ?>">Enable
                                                         Service</a>
                                                     <?php     }
                                                                 ?>
@@ -181,6 +184,63 @@ $user = new user();
                                             </div>
                                         </td>
                                     </tr>
+
+
+
+                                    <div class="modal fade" id="disableConfirm<?php echo $row['prod_id']; ?>"
+                                        tabindex="-1" role="dialog" aria-labelledby="modal-notification"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-info modal-dialog-centered modal-"
+                                            role="document">
+                                            <div class="modal-content bg-gradient-info">
+
+                                                <div class="modal-body">
+
+                                                    <div class="p-0 text-center">
+                                                        <i class="ni ni-bell-55 ni-4x"></i>
+                                                        <h2 class="heading mt-4">SURE! You want to Disable
+                                                            <?php echo $row['prod_name']; ?> ?</h2>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a type="button" class="btn btn-white text-dark"
+                                                        href="adminMediater.php?action=disableprod&id=<?php echo $row['prod_id']; ?>">Disable</a>
+                                                    <button type="button" class="btn btn-link text-white ml-auto"
+                                                        data-dismiss="modal">Close</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="modal fade" id="enableConfirm<?php echo $row['prod_id']; ?>"
+                                        tabindex="-1" role="dialog" aria-labelledby="modal-notification"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-info modal-dialog-centered modal-"
+                                            role="document">
+                                            <div class="modal-content bg-gradient-info">
+
+                                                <div class="modal-body">
+
+                                                    <div class="p-0 text-center">
+                                                        <i class="ni ni-bell-55 ni-4x"></i>
+                                                        <h2 class="heading mt-4">SURE! You want to Enable
+                                                            <?php echo $row['prod_name']; ?> ?</h2>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a type="button" class="btn btn-white text-dark"
+                                                        href="adminMediater.php?action=enableprod&id=<?php echo $row['prod_id']; ?>">Enable</a>
+                                                    <button type="button" class="btn btn-link text-white ml-auto"
+                                                        data-dismiss="modal">Close</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
 
                                     <div class="modal fade" id="deleteConfirm<?php echo $row['prod_id']; ?>"
                                         tabindex="-1" role="dialog" aria-labelledby="modal-notification"
@@ -211,7 +271,9 @@ $user = new user();
                                         role="dialog" aria-labelledby="modal-form" aria-hidden="true">
                                         <div class="modal-dialog modal- modal-dialog-centered modal-lg" role="document">
                                             <div class="modal-content">
-                                                <div class="modal-body p-5">
+                                                <div class="modal-body px-5 py-4">
+                                                    <button type="button" class="close ml-auto "
+                                                        data-dismiss="modal">&times;</button>
                                                     <div class="card-body px-lg-5 py-lg-4">
                                                         <div class="text-center text-muted mb-4">
                                                             <h1 class="display-3 text-muted">Update Product</h1>
