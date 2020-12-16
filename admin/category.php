@@ -134,12 +134,16 @@ $user = new user();
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="form-control-label">
-                                                            Link</label>
+                                                            Html</label>
                                                         <div
                                                             class="input-group input-group-merge input-group-alternative mb-3">
 
-                                                            <input class="form-control" placeholder="Link" type="text"
-                                                                name="link">
+                                                            <!-- <input class="form-control" placeholder="Link" type="text"
+                                                                name="link"> -->
+
+                                                            <textarea name="link">
+                                                             </textarea>
+
                                                         </div>
                                                     </div>
 
@@ -371,11 +375,13 @@ $user = new user();
                                                                                 Html</label>
                                                                             <div
                                                                                 class="input-group input-group-merge input-group-alternative mb-3">
-
+                                                                                <!-- 
                                                                                 <input class="form-control"
                                                                                     placeholder="Html" type="text"
                                                                                     name="link"
-                                                                                    value="<?php echo htmlspecialchars($row['html']); ?>">
+                                                                                    value="<?php echo htmlspecialchars($row['html']); ?>"> -->
+                                                                                <textarea name="link"><?php echo $row['html']; ?>
+                                                             </textarea>
                                                                             </div>
                                                                         </div>
 

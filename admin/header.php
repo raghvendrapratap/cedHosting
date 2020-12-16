@@ -34,6 +34,8 @@ $file = explode('?', $filename);
     <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" type="text/css">
     <link href="../css/customstyle.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="https://cdn.tiny.cloud/1/h4quufgyvrmygz71utgmov3pi03n4rfez69u6m1zwh829zk0/tinymce/5/tinymce.min.js"
+        referrerpolicy="origin"></script>
 </head>
 
 <body>
